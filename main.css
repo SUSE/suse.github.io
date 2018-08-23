@@ -1,24 +1,24 @@
 body {
   font-family: Helvetica, Arial;
-  background: #7DC44C;
-  color: #FDFDFD;
+  background: #0DC081;
+  color: #FFFFFF;
 
 }
 
 a:link {
-  color: #EDEDED;
+  color: #00243E;
   text-decoration: none;
 }
 a:visited {
-  color: #EDEDED;
+  color: #00243E;
   text-decoration: none;
 }
 a:hover {
-  color: #EDEDED;
+  color: #00243E;
   text-decoration: underline;
 }
 a:active {
-  color: #EDEDED;
+  color: #00243E;
   text-decoration: underline;
 }
 
