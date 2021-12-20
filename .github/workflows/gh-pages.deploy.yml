@@ -38,3 +38,5 @@ jobs:
           repository-name: SUSE/suse.github.io
           branch: main
           folder: out
+          clean-exclude: >
+            suse-open-source-policy.html
