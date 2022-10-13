@@ -18,8 +18,8 @@ jobs:
         node-version: [14.x]
 
     steps:
-      - name: Get files
-        uses: actions/checkout@v2
+      - name: Checkout project-portal
+        uses: actions/checkout@v3
         with:
           repository: SUSE/project-portal
       - name: Use Node.js ${{ matrix.node-version }}
@@ -34,11 +34,28 @@ jobs:
         run: npm run export
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.1
+      - name: Checkout main branch
+        uses: actions/checkout@v2
         with:
-          repository-name: SUSE/suse.github.io
-          branch: main
-          folder: out
-          clean-exclude: >
-            suse-open-source-policy.html
+          path: static
+      - name: Copy static files
+        run: cp -pr static/suse-open-source-policy.html out/
+      - name: Bundle for saving
+        run: tar --directory out/ -hcf artifact.tar .
+      - name: Saving bundle
+        uses: actions/upload-artifact@v3
+        with:
+          name: github-pages
+          path: ./artifact.tar
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v1
