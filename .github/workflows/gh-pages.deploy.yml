@@ -1,10 +1,10 @@
 name: Deploy to GitHub Pages
 
 on:
-  schedule:
-    - cron: '33 4 * * *'
   push:
     branches: [main]
+  repository_dispatch:
+    types: [portal_update]
 
 jobs:
   build:
@@ -13,19 +13,15 @@ jobs:
     env:
       NEXT_PUBLIC_BASE_PATH: ""
 
-    strategy:
-      matrix:
-        node-version: [14.x]
-
     steps:
       - name: Checkout project-portal
         uses: actions/checkout@v3
         with:
           repository: SUSE/project-portal
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 18
       - name: Install packages
         run: npm ci
       - name: Build project
