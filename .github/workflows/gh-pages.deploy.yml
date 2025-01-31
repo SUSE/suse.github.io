@@ -14,11 +14,11 @@ jobs:
 
     steps:
       - name: Checkout project-portal
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: SUSE/project-portal
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
       - name: Install packages
@@ -30,7 +30,7 @@ jobs:
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
       - name: Checkout main branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: static
       - name: Copy static files
