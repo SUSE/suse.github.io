@@ -38,7 +38,7 @@ jobs:
       - name: Bundle for saving
         run: tar --directory out/ -hcf artifact.tar .
       - name: Saving bundle
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: github-pages
           path: ./artifact.tar
